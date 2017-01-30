@@ -56,6 +56,29 @@ app.listen(app.get('port'));
 app.use(bodyParser.json());
 console.log("I'm wating for you @" + PORT);
 
+// Setup get started button
+request({
+    url: 'https://graph.facebook.com/v2.6/me/thread_settings',
+    qs: {access_token: Config.FB_PAGE_TOKEN},
+    method: 'POST',
+    json: {
+        "setting_type": "call_to_actions",
+        "thread_state": "new_thread",
+        "call_to_actions":[
+            {
+              "payload": "GET_STARTED"
+            }
+        ]
+    }
+}, function(error, response, body) {
+    console.log('get started button set');
+    if (error) {
+        console.log('Error on thread setting: ', error)
+    } else if (response.body.error) {
+        console.log('Error: ', response.body.error)
+    }
+})
+
 // index. Let's say something fun
 app.get('/', function(req, res) {
   res.send('"Only those who will risk going too far can possibly find out how far one can go." - T.S. Eliot');
@@ -66,9 +89,6 @@ app.get('/webhook', (req, res) => {
   if (!Config.FB_VERIFY_TOKEN) {
     throw new Error('missing FB_VERIFY_TOKEN');
   }
-  console.log('hub mode', req.query['hub.mode']);
-  console.log('hub token', req.query['hub.verify_token']);
-  console.log('send', req.query['hub.challenge']);
   if (req.query['hub.mode'] === 'subscribe' &&
     req.query['hub.verify_token'] === Config.FB_VERIFY_TOKEN) {
     res.send(req.query['hub.challenge']);
