@@ -59,7 +59,8 @@ const glPlaceId = (id, cb) => {
 
 
 module.exports = {
-  googleReq: googleReq,
+  googleNearByReq: googleNearByReq,
+  googlePlaceDetail: googlePlaceDetail,
   glPlaceQuery: glPlaceQuery,
   glPlaceId: glPlaceId
 };
