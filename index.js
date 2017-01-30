@@ -56,6 +56,7 @@ app.listen(app.get('port'));
 app.use(bodyParser.json());
 console.log("I'm wating for you @" + PORT);
 
+const request = require('request');
 // Setup get started button
 request({
     url: 'https://graph.facebook.com/v2.6/me/thread_settings',
