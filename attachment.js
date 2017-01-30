@@ -4,7 +4,6 @@
 const FB = require('./facebook');
 const GOO = require('./google');
 
-
 //Handle the different postback action
 function Attachment(sender, atts) {
     const attach = atts[0];
@@ -20,11 +19,12 @@ function Attachment(sender, atts) {
                 let elements1 = [];
                 let elements2 = [];
                 const lengthOfResults = results.length;
-                console.log('Number of results', lengthOfResults);
 
                 results.forEach((result, index) => {
                     let content = '🍴 ' + result.vicinity + '\n';
-                    content += '⭐ ' + result.rating + '\n';
+                    if(result.rating) {
+                        content += '⭐ ' + result.rating + '\n';
+                    }
                     if(result.opening_hours) {
                         if(result.opening_hours.open_now) {
                             content += '營業中(y)'
@@ -40,7 +40,7 @@ function Attachment(sender, atts) {
                             {
                                 "type": "postback",
                                 "title": "瞭解更多",
-                                "payload": "SHOW_" + result.place_id
+                                "payload": "SHOW_DETAIL_" + result.place_id
                             }
                         ]
                     };
@@ -62,7 +62,7 @@ function Attachment(sender, atts) {
                     }
 
                 });
-                
+
                 if(lengthOfResults >= 10) {
 
                     FB.fbGenericTemplate(sender, elements2, (err, data) => {

@@ -2,6 +2,9 @@
 
 /* handle postbacks */
 const FB = require('./facebook');
+const GOO = require('./google');
+const Config = require('./const.js');
+const API_KEY = Config.GOOGLE_API_KEY;
 
 
 //Handle the different postback action
@@ -51,6 +54,18 @@ function Postback(sender, postback) {
             });
             break;
         default:
+             if(payload.startsWith('SHOW_DETAIL_')) {
+                 let id = payload.slice(12, payload.length);
+                 console.log('place id', id);
+
+                 GOO.glPlaceId(id, (err, data) => {
+                    if (err) {
+                        console.log('err with google place id get request', err);
+                    }
+                    console.log('got place: ', data);
+                 });
+             }
+
             break;
     }
 }

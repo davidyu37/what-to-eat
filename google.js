@@ -31,8 +31,24 @@ const glPlaceQuery = (location, cb) => {
   });
 };
 
+const glPlaceId = (id, cb) => {
+  const opts = {
+    qs: {
+        placeid: id,
+        key: API_KEY
+    }
+  };
+  googleReq(opts, (err, resp, data) => {
+    if (cb) {
+      cb(err || data.error && data.error.message, data);
+    }
+    
+  });
+};
+
 
 module.exports = {
   googleReq: googleReq,
-  glPlaceQuery: glPlaceQuery
+  glPlaceQuery: glPlaceQuery,
+  glPlaceId: glPlaceId
 };
