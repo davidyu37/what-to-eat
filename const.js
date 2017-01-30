@@ -14,8 +14,11 @@ if (!FB_VERIFY_TOKEN) {
   FB_VERIFY_TOKEN = "just_do_it";
 }
 
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+
 module.exports = {
   WIT_TOKEN: WIT_TOKEN,
   FB_PAGE_TOKEN: FB_PAGE_TOKEN,
   FB_VERIFY_TOKEN: FB_VERIFY_TOKEN,
+  GOOGLE_API_KEY: GOOGLE_API_KEY
 };
