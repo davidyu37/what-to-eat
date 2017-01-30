@@ -4,7 +4,7 @@ const request = require('request');
 const Config = require('./const.js');
 const API_KEY = Config.GOOGLE_API_KEY;
 
-const googleReq = request.defaults({
+const googleNearByReq = request.defaults({
   uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
   method: 'GET',
   json: true,
@@ -12,6 +12,17 @@ const googleReq = request.defaults({
     'Content-Type': 'application/x-www-form-urlencoded'
   },
 });
+
+const googlePlaceDetail = request.defaults({
+  uri: 'https://maps.googleapis.com/maps/api/place/details/json',
+  method: 'GET',
+  json: true,
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+});
+
+
 
 const glPlaceQuery = (location, cb) => {
   const opts = {
@@ -23,7 +34,7 @@ const glPlaceQuery = (location, cb) => {
         key: API_KEY
     }
   };
-  googleReq(opts, (err, resp, data) => {
+  googleNearByReq(opts, (err, resp, data) => {
     if (cb) {
       cb(err || data.error && data.error.message, data);
     }
@@ -38,7 +49,7 @@ const glPlaceId = (id, cb) => {
         key: API_KEY
     }
   };
-  googleReq(opts, (err, resp, data) => {
+  googlePlaceDetail(opts, (err, resp, data) => {
     if (cb) {
       cb(err || data.error && data.error.message, data);
     }
