@@ -17,7 +17,8 @@ function Attachment(sender, atts) {
                 //Send list of wonderful places
                 const next_page_token = data.next_page_token;
                 const results = data.results;
-                let elements = [];
+                let elements1 = [];
+                let elements2 = [];
                 const lengthOfResults = results.length;
                 console.log('Number of results', lengthOfResults);
 
@@ -44,14 +45,13 @@ function Attachment(sender, atts) {
                         ]
                     };
                     if(index < 10) {
-                        elements.push(restaurant);
+                        elements1.push(restaurant);
+                    } else { 
+                        elements2.push(restaurant);
                     }
                 });
 
-                console.log('elements', elements);
-
-
-                FB.fbGenericTemplate(sender, elements, (err, data) => {
+                FB.fbGenericTemplate(sender, elements1, (err, data) => {
                     if (err) {
                         console.log(
                             'Oops! An error occurred while forwarding the response to',
@@ -62,6 +62,21 @@ function Attachment(sender, atts) {
                     }
 
                 });
+                
+                if(lengthOfResults >= 10) {
+
+                    FB.fbGenericTemplate(sender, elements2, (err, data) => {
+                        if (err) {
+                            console.log(
+                                'Oops! An error occurred while forwarding the response to',
+                                recipientId,
+                                ':',
+                                err
+                            );
+                        }
+
+                    });
+                }
 
             });
             break;
