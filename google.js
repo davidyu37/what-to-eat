@@ -17,9 +17,9 @@ const glPlaceQuery = (location, cb) => {
   const opts = {
     qs: {
         location: location.lat + ', ' + location.long,
-        radius: 1000,
         types: 'food',
         language: 'zh-TW',
+        rankby: 'distance',
         key: API_KEY
     }
   };
