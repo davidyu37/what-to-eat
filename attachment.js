@@ -6,11 +6,12 @@ const FB = require('./facebook');
 
 //Handle the different postback action
 function Attachment(sender, atts) {
-    let type = atts.type;
+    const attach = atts[0];
+    let type = attach.type;
     console.log('attachments', atts);
     switch(type) {
         case "location":
-            console.log('Got Location: ', atts);
+            console.log('Got Location: ', attach.payload.coordinates);
             
             break;
         default:
