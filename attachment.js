@@ -24,13 +24,13 @@ function Attachment(sender, atts) {
                 results.forEach((result, index) => {
                     let content = '🍴 ' + result.vicinity + '\n';
                     content += '⭐ ' + result.rating + '\n';
-                    if(result.opening_hours.open_now) {
-                        content += '營業中(y)'
-                    } else {
-                        content += '休息中💤'
+                    if(result.opening_hours) {
+                        if(result.opening_hours.open_now) {
+                            content += '營業中(y)'
+                        } else {
+                            content += '休息中💤'
+                        }
                     }
-
-
 
                     let restaurant = {
                         "title": result.name,
