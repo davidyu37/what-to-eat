@@ -14,6 +14,7 @@ const bot = require('./bot.js');
 const Config = require('./const.js');
 const FB = require('./facebook.js');
 const Postback = require('./postback');
+const Attachment = require('./attachment');
 
 // Setting up our bot
 const wit = bot.getWit();
@@ -123,11 +124,12 @@ app.post('/webhook', (req, res) => {
     if (atts) {
       // We received an attachment
 
-      // Let's reply with an automatic message
-      FB.fbMessage(
-        sender,
-        'Sorry I can only process text messages for now.'
-      );
+      Attachment(sender, atts);
+      // // Let's reply with an automatic message
+      // FB.fbMessage(
+      //   sender,
+      //   'Sorry I can only process text messages for now.'
+      // );
     } else if (msg) {
       // We received a text message
 

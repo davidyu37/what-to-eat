@@ -5,7 +5,7 @@ const FB = require('./facebook');
 
 
 //Handle the different postback action
-function handlePostback(sender, postback) {
+function Postback(sender, postback) {
     let payload = postback.payload;
     switch(payload) {
         case "GET_STARTED":
@@ -32,4 +32,4 @@ function handlePostback(sender, postback) {
 }
 
 
-module.exports = handlePostback;
+module.exports = Postback;
