@@ -12,8 +12,9 @@ function Attachment(sender, atts) {
     switch(type) {
         case "location":
             console.log('Got Location: ', attach.payload.coordinates);
-            GOO.glPlaceQuery(sender, attach.payload.coordinates, (err, data) => {
+            GOO.glPlaceQuery(attach.payload.coordinates, (err, data) => {
                 console.log('google place API: ', data);
+                //Send list of wonderful places
             });
             break;
         default:
