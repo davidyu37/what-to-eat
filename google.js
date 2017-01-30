@@ -73,5 +73,6 @@ const glPlaceQuery = (recipientId, location, cb) => {
 
 
 module.exports = {
-  googleReq: googleReq
+  googleReq: googleReq,
+  glPlaceQuery: glPlaceQuery
 };
