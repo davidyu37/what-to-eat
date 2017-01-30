@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "bot": "node bot.js",
-    "test": "jest"
+    "bot": "WIT_TOKEN='UPMDCGZQ3COPSJH6HFFUVSFM36274FKP' node bot.js",
+    "test": "jest",
+    "deploy": "git add . && git commit -am 'deploy' && git push heroku master"
   },
   "author": "",
   "license": "MIT",
