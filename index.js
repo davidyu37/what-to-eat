@@ -13,6 +13,7 @@ const express = require('express');
 const bot = require('./bot.js');
 const Config = require('./const.js');
 const FB = require('./facebook.js');
+const Postback = require('./postback');
 
 // Setting up our bot
 const wit = bot.getWit();
@@ -157,6 +158,10 @@ app.post('/webhook', (req, res) => {
         }
       );
     }
+  } else if(messaging && messaging.postback) {
+    const sender = messaging.sender.id;
+
+    Postback(sender, messaging.postback);
   }
   res.sendStatus(200);
 });

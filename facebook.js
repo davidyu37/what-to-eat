@@ -37,6 +37,26 @@ const fbMessage = (recipientId, msg, cb) => {
   });
 };
 
+const fbQuickReply = (recipientId, text, replies, cb) => {
+  const opts = {
+    form: {
+      recipient: {
+        id: recipientId,
+      },
+      message: {
+        text: text,
+        quick_replies: replies
+      },
+    },
+  };
+
+  fbReq(opts, (err, resp, data) => {
+    if (cb) {
+      cb(err || data.error && data.error.message, data);
+    }
+  });
+};
+
 
 // See the Webhook reference
 // https://developers.facebook.com/docs/messenger-platform/webhook-reference
@@ -58,5 +78,6 @@ const getFirstMessagingEntry = (body) => {
 module.exports = {
   getFirstMessagingEntry: getFirstMessagingEntry,
   fbMessage: fbMessage,
+  fbQuickReply: fbQuickReply,
   fbReq: fbReq
 };
