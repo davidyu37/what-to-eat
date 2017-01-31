@@ -66,7 +66,7 @@ function Postback(sender, postback) {
 
                     const result = data.result;
 
-                    console.log('result', result);
+                    console.log('result', result.url);
 
                     let pic = 'https://www.awoo.org/images/poa/placeholder.png'
                     if(result.photos) {
@@ -75,6 +75,7 @@ function Postback(sender, postback) {
 
                     let firstElement = {
                         title: result.name,
+                        subtitle: '⭐ ' + result.rating,
                         image_url: pic
                     };
 
