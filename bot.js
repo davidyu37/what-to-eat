@@ -67,17 +67,21 @@ const actions = {
             "payload":"OPEN_MESSENGER"
         }
     ];
-    FB.fbQuickReply(sender, '請分享您的位置', replies, (err, data) => {
-        if (err) {
-            console.log(
-                'Oops! An error occurred while forwarding the response to',
-                recipientId,
-                ':',
-                err
-            );
-        }
-        cb();
-    });
+
+    const recipientId = context._fbid_;
+    if (recipientId) {
+      FB.fbQuickReply(recipientId, '請分享您的位置', replies, (err, data) => {
+          if (err) {
+              console.log(
+                  'Oops! An error occurred while forwarding the response to',
+                  recipientId,
+                  ':',
+                  err
+              );
+          }
+          cb();
+      });
+    }
   },
   merge(sessionId, context, entities, message, cb) {
     // Retrieve the location entity and store it into a context field
