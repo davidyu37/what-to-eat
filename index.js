@@ -111,34 +111,71 @@ app.post('/webhook', (req, res) => {
       //   'Sorry I can only process text messages for now.'
       // );
     } else if (msg) {
-      // We received a text message
 
+      console.log('msg', msg);
+      // We received a text message
+      if(msg === 'Open Messenger') {
+        let elements = [
+          {
+            title: '開啟Messenger應用程式',
+            buttons: [
+                {
+                    type: 'web_url',
+                    title: '開啟',
+                    url: 'https://www.messenger.com/t/1107667369345599'
+                }
+            ]  
+          }
+        ];
+
+        FB.fbGenericTemplate(sender, elements, (err, data) => {
+            if (err) {
+                console.log(
+                    'Oops! An error occurred while forwarding the response to',
+                    sender,
+                    ':',
+                    err
+                );
+            }
+        });
+      } else {
+        FB.fbQuickReply(sender, '請分享您的位置', replies, (err, data) => {
+            if (err) {
+                console.log(
+                    'Oops! An error occurred while forwarding the response to',
+                    sender,
+                    ':',
+                    err
+                );
+            }
+        });
+      }
       // Let's forward the message to the Wit.ai Bot Engine
       // This will run all actions until our bot has nothing left to do
-      wit.runActions(
-        sessionId, // the user's current session
-        msg, // the user's message 
-        sessions[sessionId].context, // the user's current session state
-        (error, context) => {
-          if (error) {
-            console.log('Oops! Got an error from Wit:', error);
-          } else {
-            // Our bot did everything it has to do.
-            // Now it's waiting for further messages to proceed.
-            console.log('Waiting for futher messages.');
+      // wit.runActions(
+      //   sessionId, // the user's current session
+      //   msg, // the user's message 
+      //   sessions[sessionId].context, // the user's current session state
+      //   (error, context) => {
+      //     if (error) {
+      //       console.log('Oops! Got an error from Wit:', error);
+      //     } else {
+      //       // Our bot did everything it has to do.
+      //       // Now it's waiting for further messages to proceed.
+      //       console.log('Waiting for futher messages.');
 
-            // Based on the session state, you might want to reset the session.
-            // This depends heavily on the business logic of your bot.
-            // Example:
-            // if (context['done']) {
-            //   delete sessions[sessionId];
-            // }
+      //       // Based on the session state, you might want to reset the session.
+      //       // This depends heavily on the business logic of your bot.
+      //       // Example:
+      //       // if (context['done']) {
+      //       //   delete sessions[sessionId];
+      //       // }
 
-            // Updating the user's current session state
-            sessions[sessionId].context = context;
-          }
-        }
-      );
+      //       // Updating the user's current session state
+      //       sessions[sessionId].context = context;
+      //     }
+      //   }
+      // );
     }
   } else if(messaging && messaging.postback) {
     const sender = messaging.sender.id;
