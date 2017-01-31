@@ -79,6 +79,10 @@ function Postback(sender, postback) {
                         image_url: pic
                     };
 
+                    if(!result.rating) {
+                        firstElement.subtitle = '⭐ 未有評價'
+                    }
+
                     if(result.website) {
                         firstElement.subtitle = result.website;
                         // firstElement.buttons = [
@@ -117,6 +121,7 @@ function Postback(sender, postback) {
                                 {
                                     title: "撥打",
                                     type: "phone_number",
+                                    messenger_extensions: true,
                                     payload: result.formatted_phone_number                      
                                 }
                             ]
