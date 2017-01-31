@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const Config = require('./const.js');
 
 const fbSetup = request.defaults({
   uri: 'https://graph.facebook.com/v2.6/me/thread_settings',
