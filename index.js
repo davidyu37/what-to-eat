@@ -85,7 +85,7 @@ app.post('/webhook', (req, res) => {
   // Parsing the Messenger API response
   const messaging = FB.getFirstMessagingEntry(req.body);
 
-  console.log('messaging', messaging);
+  // console.log('messaging', messaging);
   if (messaging && messaging.message) {
 
     // Yay! We got a new message!
@@ -112,7 +112,7 @@ app.post('/webhook', (req, res) => {
       // );
     } else if (msg) {
       // We received a text message
-      
+
       // Let's forward the message to the Wit.ai Bot Engine
       // This will run all actions until our bot has nothing left to do
       wit.runActions(

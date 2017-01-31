@@ -20,9 +20,6 @@ const firstEntityValue = (entities, entity) => {
 // Bot actions
 const actions = {
   say(sessionId, context, message, cb) {
-    console.log('sessionId', sessionId);
-    console.log('context', context);
-    console.log('message', message);
 
     // Bot testing mode, run cb() and return
     if (require.main === module) {
@@ -69,6 +66,7 @@ const actions = {
     ];
 
     const recipientId = context._fbid_;
+    console.log('send to: ', recipientId);
     if (recipientId) {
       FB.fbQuickReply(recipientId, '請分享您的位置', replies, (err, data) => {
           if (err) {
