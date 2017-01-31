@@ -63,6 +63,56 @@ function Postback(sender, postback) {
                         console.log('err with google place id get request', err);
                     }
                     console.log('got place: ', data);
+                    let elements = [
+                        {
+                            title: data.name,
+                            image_url: 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=' + API_KEY + '&photoreference=' + data.photos[0].photo_reference,
+                            subtitle: data.website,
+                            buttons: [
+                                {
+                                    title: "官網",
+                                    type: "web_url",
+                                    url: data.website,
+                                    messenger_extensions: true,
+                                    webview_height_ratio: "tall",
+                                    fallback_url: "https://www.messenger.com/t/1107667369345599"                        
+                                }
+                            ]
+                        },
+                        {
+                            title: '地址',
+                            image_url: 'http://iosicongallery.com/img/512/google-maps-2014.png',
+                            subtitle: data.formatted_address,
+                            buttons: [
+                                {
+                                    title: "打開",
+                                    type: "web_url",
+                                    url: data.url,
+                                    messenger_extensions: true,
+                                    webview_height_ratio: "tall",
+                                    fallback_url: "https://www.messenger.com/t/1107667369345599"                        
+                                }
+                            ]
+                        },
+                        {
+                            title: '聯絡',
+                            image_url: 'https://cdn2.iconfinder.com/data/icons/ios-7-style-metro-ui-icons/512/MetroUI_Phone.png',
+                            subtitle: data.formatted_phone_number,
+                            buttons: [
+                                {
+                                    title: "撥打",
+                                    type: "phone_number",
+                                    payload: data.formatted_phone_number                      
+                                }
+                            ]
+                        }
+                    ];
+
+                    FB.fbListTemplate(sender, elements, (err, data) => {
+                        if(err) {
+                            console.log('err while sending list', err);
+                        }
+                    });
                  });
              }
 

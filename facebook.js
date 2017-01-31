@@ -74,13 +74,38 @@ const fbGenericTemplate = (recipientId, elements, cb) => {
       },
     },
   };
-
+  
   fbReq(opts, (err, resp, data) => {
     if (cb) {
       cb(err || data.error && data.error.message, data);
     }
   });
-}
+};
+
+const fbListTemplate = (recipientId, elements, cb) => {
+  const opts = {
+    form: {
+      recipient: {
+        id: recipientId,
+      },
+      message: {
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'list',
+            elements: elements
+          }
+        }
+      },
+    },
+  };
+  
+  fbReq(opts, (err, resp, data) => {
+    if (cb) {
+      cb(err || data.error && data.error.message, data);
+    }
+  });
+};
 
 
 // See the Webhook reference
@@ -105,5 +130,6 @@ module.exports = {
   fbMessage: fbMessage,
   fbQuickReply: fbQuickReply,
   fbGenericTemplate: fbGenericTemplate,
+  fbListTemplate: fbListTemplate,
   fbReq: fbReq
 };
