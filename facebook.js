@@ -82,7 +82,7 @@ const fbGenericTemplate = (recipientId, elements, cb) => {
   });
 };
 
-const fbListTemplate = (recipientId, elements, cb) => {
+const fbListTemplate = (recipientId, elements, button, cb) => {
   const opts = {
     form: {
       recipient: {
@@ -94,7 +94,10 @@ const fbListTemplate = (recipientId, elements, cb) => {
           payload: {
             template_type: 'list',
             top_element_style: 'large',
-            elements: elements
+            elements: elements,
+            buttons: [
+              button
+            ]
           }
         }
       },

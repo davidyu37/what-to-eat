@@ -116,19 +116,15 @@ function Postback(sender, postback) {
                         {
                             title: '聯絡',
                             image_url: 'https://cdn2.iconfinder.com/data/icons/ios-7-style-metro-ui-icons/512/MetroUI_Phone.png',
-                            subtitle: result.formatted_phone_number,
-                            buttons: [
-                                {
-                                    title: "撥打",
-                                    type: "phone_number",
-                                    messenger_extensions: true,
-                                    payload: result.formatted_phone_number                      
-                                }
-                            ]
+                            subtitle: result.formatted_phone_number
                         }
                     ];
 
-                    FB.fbListTemplate(sender, elements, (err, data) => {
+                    let button = {
+                        type: 'element_share'
+                    };
+
+                    FB.fbListTemplate(sender, elements, button, (err, data) => {
                         if(err) {
                             console.log('err while sending list', err);
                         }
