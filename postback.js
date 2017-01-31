@@ -65,7 +65,7 @@ function Postback(sender, postback) {
                     const result = data.result;
 
                     console.log('got place: ', data);
-                    let pic = 'http://budapesttimes.hu/wp-content/themes/newsroom14/img/placeholder.png'
+                    let pic = 'https://www.awoo.org/images/poa/placeholder.png'
 
                     if(result.photos[0]) {
                         pic = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=' + API_KEY + '&photoreference=' + result.photos[0].photo_reference;
@@ -89,7 +89,7 @@ function Postback(sender, postback) {
                         },
                         {
                             title: '地址',
-                            image_url: 'http://iosicongallery.com/img/512/google-maps-2014.png',
+                            image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Map_ballonicon2.svg/2000px-Map_ballonicon2.svg.png',
                             subtitle: result.formatted_address,
                             buttons: [
                                 {
