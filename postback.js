@@ -116,7 +116,14 @@ function Postback(sender, postback) {
                         {
                             title: '聯絡',
                             image_url: 'https://cdn2.iconfinder.com/data/icons/ios-7-style-metro-ui-icons/512/MetroUI_Phone.png',
-                            subtitle: result.formatted_phone_number
+                            subtitle: result.formatted_phone_number,
+                            buttons: [
+                                {
+                                    title: "撥打",
+                                    type: "phone_number",
+                                    payload: result.formatted_phone_number                       
+                                }
+                            ]
                         }
                     ];
 

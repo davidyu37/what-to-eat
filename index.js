@@ -52,7 +52,7 @@ const findOrCreateSession = (fbid) => {
   return sessionId;
 };
 
-Init.whitelist();
+Init.greetingMessage();
 
 // Starting our webserver and putting it all together
 const app = express();

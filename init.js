@@ -49,7 +49,26 @@ const whitelist = () => {
     });
 };
 
+// Setup greetingMessage
+const greetingMessage = () => {
+    const opts = {
+        json: {
+            "setting_type": "greeting",
+            "greeting":{
+                "text":"{{user_first_name}}您好, 餓了嗎？ \n 讓我來幫你找吃的吧"
+            }
+        }
+    };
+    fbSetup(opts, (err, resp, data) => {
+        if (err) {
+            console.log('err setting up greeting', err);
+        }
+        console.log('greeting message set up');
+    });
+};
+
 module.exports = {
     getStartedButton: getStartedButton,
-    whitelist: whitelist
+    whitelist: whitelist,
+    greetingMessage: greetingMessage
 };
