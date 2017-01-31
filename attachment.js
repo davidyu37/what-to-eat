@@ -27,7 +27,7 @@ function Attachment(sender, atts) {
                     }
                     if(result.opening_hours) {
                         if(result.opening_hours.open_now) {
-                            content += '營業中(y)'
+                            content += '營業中⏳'
                         } else {
                             content += '休息中💤'
                         }

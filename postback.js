@@ -63,10 +63,16 @@ function Postback(sender, postback) {
                         console.log('err with google place id get request', err);
                     }
                     console.log('got place: ', data);
+                    let pic = 'http://budapesttimes.hu/wp-content/themes/newsroom14/img/placeholder.png'
+
+                    if(data.photos[0]) {
+                        pic = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=' + API_KEY + '&photoreference=' + data.photos[0].photo_reference;
+                    }
+
                     let elements = [
                         {
                             title: data.name,
-                            image_url: 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=' + API_KEY + '&photoreference=' + data.photos[0].photo_reference,
+                            image_url: pic,
                             subtitle: data.website,
                             buttons: [
                                 {
