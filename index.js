@@ -137,6 +137,24 @@ app.post('/webhook', (req, res) => {
                     err
                 );
             }
+
+            setTimeout(() => {
+              const replies = [
+                  {
+                      "content_type":"location",
+                  }
+              ];
+              FB.fbQuickReply(sender, '請分享您的位置', replies, (err, data) => {
+                  if (err) {
+                      console.log(
+                          'Oops! An error occurred while forwarding the response to',
+                          sender,
+                          ':',
+                          err
+                      );
+                  }
+              });
+            }, 3000);
         });
       } else {
         const replies = [
