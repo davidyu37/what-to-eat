@@ -63,8 +63,7 @@ function Postback(sender, postback) {
                         console.log('err with google place id get request', err);
                     }
                     const result = data.result;
-
-                    console.log('got place: ', data);
+                    
                     let pic = 'https://www.awoo.org/images/poa/placeholder.png'
 
                     if(result.photos[0]) {
@@ -115,6 +114,8 @@ function Postback(sender, postback) {
                             ]
                         }
                     ];
+
+                    console.log('elements', elements);
 
                     FB.fbListTemplate(sender, elements, (err, data) => {
                         if(err) {
