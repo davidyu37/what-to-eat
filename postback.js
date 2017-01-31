@@ -129,6 +129,20 @@ function Postback(sender, postback) {
                                     payload: result.formatted_phone_number                       
                                 }
                             ]
+                        },
+                        {
+                            title: '吃啥？是啥？',
+                            image_url: 'https://scontent.ftpe1-1.fna.fbcdn.net/v/t31.0-8/p960x960/16402748_1108434559268880_2299927312585906321_o.png?oh=49f39239467540a54c61569381654fc6&oe=590CDCB6',
+                            subtitle: '吃啥？是你的美食顧問',
+                            buttons: [
+                                {
+                                    title: "給個👍",
+                                    type: "web_url",
+                                    url: 'https://www.facebook.com/whattoeatnow/',
+                                    messenger_extensions: true,
+                                    webview_height_ratio: "tall"                   
+                                }
+                            ]
                         }
                     ];
 
