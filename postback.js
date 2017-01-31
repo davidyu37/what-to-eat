@@ -62,23 +62,25 @@ function Postback(sender, postback) {
                     if (err) {
                         console.log('err with google place id get request', err);
                     }
+                    const result = data.result;
+
                     console.log('got place: ', data);
                     let pic = 'http://budapesttimes.hu/wp-content/themes/newsroom14/img/placeholder.png'
 
-                    if(data.photos[0]) {
-                        pic = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=' + API_KEY + '&photoreference=' + data.photos[0].photo_reference;
+                    if(result.photos[0]) {
+                        pic = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=' + API_KEY + '&photoreference=' + result.photos[0].photo_reference;
                     }
 
                     let elements = [
                         {
-                            title: data.name,
+                            title: result.name,
                             image_url: pic,
-                            subtitle: data.website,
+                            subtitle: result.website,
                             buttons: [
                                 {
                                     title: "官網",
                                     type: "web_url",
-                                    url: data.website,
+                                    url: result.website,
                                     messenger_extensions: true,
                                     webview_height_ratio: "tall",
                                     fallback_url: "https://www.messenger.com/t/1107667369345599"                        
@@ -88,12 +90,12 @@ function Postback(sender, postback) {
                         {
                             title: '地址',
                             image_url: 'http://iosicongallery.com/img/512/google-maps-2014.png',
-                            subtitle: data.formatted_address,
+                            subtitle: result.formatted_address,
                             buttons: [
                                 {
                                     title: "打開",
                                     type: "web_url",
-                                    url: data.url,
+                                    url: result.url,
                                     messenger_extensions: true,
                                     webview_height_ratio: "tall",
                                     fallback_url: "https://www.messenger.com/t/1107667369345599"                        
@@ -103,12 +105,12 @@ function Postback(sender, postback) {
                         {
                             title: '聯絡',
                             image_url: 'https://cdn2.iconfinder.com/data/icons/ios-7-style-metro-ui-icons/512/MetroUI_Phone.png',
-                            subtitle: data.formatted_phone_number,
+                            subtitle: result.formatted_phone_number,
                             buttons: [
                                 {
                                     title: "撥打",
                                     type: "phone_number",
-                                    payload: data.formatted_phone_number                      
+                                    payload: result.formatted_phone_number                      
                                 }
                             ]
                         }
