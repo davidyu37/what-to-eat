@@ -62,10 +62,14 @@ function Postback(sender, postback) {
                     if (err) {
                         console.log('err with google place id get request', err);
                     }
+
+
                     const result = data.result;
 
+                    console.log('result', result);
+
                     let pic = 'https://www.awoo.org/images/poa/placeholder.png'
-                    if(result.photos[0]) {
+                    if(result.photos) {
                         pic = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=' + API_KEY + '&photoreference=' + result.photos[0].photo_reference;
                     }
 
@@ -118,8 +122,6 @@ function Postback(sender, postback) {
                             ]
                         }
                     ];
-
-                    console.log('elements', elements);
 
                     FB.fbListTemplate(sender, elements, (err, data) => {
                         if(err) {

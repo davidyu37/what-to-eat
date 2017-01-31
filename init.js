@@ -45,7 +45,7 @@ const whitelist = () => {
         if (err) {
             console.log('err setting up get started');
         }
-        console.log('get started btn set up');
+        console.log('whitelist set up');
     });
 };
 
