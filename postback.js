@@ -63,13 +63,14 @@ function Postback(sender, postback) {
                         console.log('err with google place id get request', err);
                     }
                     const result = data.result;
-                    
+
                     let pic = 'https://www.awoo.org/images/poa/placeholder.png'
 
                     if(result.photos[0]) {
                         pic = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=' + API_KEY + '&photoreference=' + result.photos[0].photo_reference;
                     }
 
+                    console.log('urls', result.url, result.website);
                     let elements = [
                         {
                             title: result.name,
@@ -86,33 +87,33 @@ function Postback(sender, postback) {
                                 }
                             ]
                         },
-                        {
-                            title: '地址',
-                            image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Map_ballonicon2.svg/2000px-Map_ballonicon2.svg.png',
-                            subtitle: result.formatted_address,
-                            buttons: [
-                                {
-                                    title: "打開",
-                                    type: "web_url",
-                                    url: result.url,
-                                    messenger_extensions: true,
-                                    webview_height_ratio: "tall",
-                                    fallback_url: "https://www.messenger.com/t/1107667369345599"                        
-                                }
-                            ]
-                        },
-                        {
-                            title: '聯絡',
-                            image_url: 'https://cdn2.iconfinder.com/data/icons/ios-7-style-metro-ui-icons/512/MetroUI_Phone.png',
-                            subtitle: result.formatted_phone_number,
-                            buttons: [
-                                {
-                                    title: "撥打",
-                                    type: "phone_number",
-                                    payload: result.formatted_phone_number                      
-                                }
-                            ]
-                        }
+                        // {
+                        //     title: '地址',
+                        //     image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Map_ballonicon2.svg/2000px-Map_ballonicon2.svg.png',
+                        //     subtitle: result.formatted_address,
+                        //     buttons: [
+                        //         {
+                        //             title: "打開",
+                        //             type: "web_url",
+                        //             url: result.url,
+                        //             messenger_extensions: true,
+                        //             webview_height_ratio: "tall",
+                        //             fallback_url: "https://www.messenger.com/t/1107667369345599"                        
+                        //         }
+                        //     ]
+                        // },
+                        // {
+                        //     title: '聯絡',
+                        //     image_url: 'https://cdn2.iconfinder.com/data/icons/ios-7-style-metro-ui-icons/512/MetroUI_Phone.png',
+                        //     subtitle: result.formatted_phone_number,
+                        //     buttons: [
+                        //         {
+                        //             title: "撥打",
+                        //             type: "phone_number",
+                        //             payload: result.formatted_phone_number                      
+                        //         }
+                        //     ]
+                        // }
                     ];
 
                     console.log('elements', elements);
