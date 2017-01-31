@@ -15,6 +15,7 @@ const Config = require('./const.js');
 const FB = require('./facebook.js');
 const Postback = require('./postback');
 const Attachment = require('./attachment');
+const Init = require('./init');
 
 // Setting up our bot
 const wit = bot.getWit();
@@ -51,6 +52,8 @@ const findOrCreateSession = (fbid) => {
   return sessionId;
 };
 
+Init.whitelist();
+
 // Starting our webserver and putting it all together
 const app = express();
 app.set('port', PORT);
@@ -58,29 +61,6 @@ app.listen(app.get('port'));
 app.use(bodyParser.json());
 console.log("I'm wating for you @" + PORT);
 
-const request = require('request');
-// Setup get started button
-request({
-    url: 'https://graph.facebook.com/v2.6/me/thread_settings',
-    qs: {access_token: Config.FB_PAGE_TOKEN},
-    method: 'POST',
-    json: {
-        "setting_type": "call_to_actions",
-        "thread_state": "new_thread",
-        "call_to_actions":[
-            {
-              "payload": "GET_STARTED"
-            }
-        ]
-    }
-}, function(error, response, body) {
-    console.log('get started button set');
-    if (error) {
-        console.log('Error on thread setting: ', error)
-    } else if (response.body.error) {
-        console.log('Error: ', response.body.error)
-    }
-})
 
 // index. Let's say something fun
 app.get('/', function(req, res) {

@@ -76,16 +76,16 @@ function Postback(sender, postback) {
 
                     if(result.website) {
                         firstElement.subtitle = result.website;
-                        firstElement.buttons = [
-                            {
-                                title: "官網",
-                                type: "web_url",
-                                url: result.website,
-                                messenger_extensions: true,
-                                webview_height_ratio: "tall",
-                                fallback_url: "https://www.messenger.com/t/1107667369345599"                        
-                            }
-                        ];
+                        // firstElement.buttons = [
+                        //     {
+                        //         title: "官網",
+                        //         type: "web_url",
+                        //         url: result.website,
+                        //         messenger_extensions: true,
+                        //         webview_height_ratio: "tall",
+                        //         fallback_url: "https://www.messenger.com/t/1107667369345599"                        
+                        //     }
+                        // ];
                     }
 
                     let elements = [
