@@ -105,8 +105,7 @@ function Postback(sender, postback) {
                                     type: "web_url",
                                     url: result.url,
                                     messenger_extensions: true,
-                                    webview_height_ratio: "tall",
-                                    fallback_url: "https://www.messenger.com/t/1107667369345599"                        
+                                    webview_height_ratio: "tall"                       
                                 }
                             ]
                         },
