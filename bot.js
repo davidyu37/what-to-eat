@@ -20,7 +20,9 @@ const firstEntityValue = (entities, entity) => {
 // Bot actions
 const actions = {
   say(sessionId, context, message, cb) {
-    console.log(message);
+    console.log('sessionId', sessionId);
+    console.log('context', context);
+    console.log('message', message);
 
     // Bot testing mode, run cb() and return
     if (require.main === module) {
@@ -54,27 +56,50 @@ const actions = {
       cb();
     }
   },
-  merge(sessionId, context, entities, message, cb) {
-    // Retrieve the location entity and store it into a context field
-    const loc = firstEntityValue(entities, 'location');
-    if (loc) {
-      context.loc = loc; // store it in context
-    }
-
-    cb(context);
+  findRestaurant(sessionId, context, cb) {
+    const replies = [
+        {
+            "content_type":"location",
+        },
+        {
+            "content_type":"text",
+            "title":"Open Messenger",
+            "payload":"OPEN_MESSENGER"
+        }
+    ];
+    FB.fbQuickReply(sender, '請分享您的位置', replies, (err, data) => {
+        if (err) {
+            console.log(
+                'Oops! An error occurred while forwarding the response to',
+                recipientId,
+                ':',
+                err
+            );
+        }
+        cb();
+    });
   },
+  // merge(sessionId, context, entities, message, cb) {
+  //   // Retrieve the location entity and store it into a context field
+  //   const loc = firstEntityValue(entities, 'location');
+  //   if (loc) {
+  //     context.loc = loc; // store it in context
+  //   }
 
-  error(sessionId, context, error) {
-    console.log(error.message);
-  },
+  //   cb(context);
+  // },
 
-  // fetch-weather bot executes
-  ['fetch-weather'](sessionId, context, cb) {
-    // Here should go the api call, e.g.:
-    // context.forecast = apiCall(context.loc)
-    context.forecast = 'sunny';
-    cb(context);
-  },
+  // error(sessionId, context, error) {
+  //   console.log(error.message);
+  // },
+
+  // // fetch-weather bot executes
+  // ['fetch-weather'](sessionId, context, cb) {
+  //   // Here should go the api call, e.g.:
+  //   // context.forecast = apiCall(context.loc)
+  //   context.forecast = 'sunny';
+  //   cb(context);
+  // },
 };
 
 

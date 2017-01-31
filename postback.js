@@ -40,6 +40,11 @@ function Postback(sender, postback) {
             const replies = [
                 {
                     "content_type":"location",
+                },
+                {
+                    "content_type":"text",
+                    "title":"Open Messenger",
+                    "payload":"OPEN_MESSENGER"
                 }
             ];
             FB.fbQuickReply(sender, '請分享您的位置', replies, (err, data) => {
