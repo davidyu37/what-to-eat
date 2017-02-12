@@ -1,11 +1,11 @@
 {
-  "name": "Wit-Facebook",
+  "name": "Google-Facebook",
   "version": "1.0.0",
-  "description": "Simple Wit-Facebook",
+  "description": "Simple Google-Facebook",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "bot": "WIT_TOKEN='UPMDCGZQ3COPSJH6HFFUVSFM36274FKP' node bot.js",
+    "bot": "node bot.js",
     "test": "jest",
     "deploy": "git add . && git commit -am 'deploy' && git push heroku master"
   },
